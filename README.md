@@ -11,7 +11,7 @@
 5. Если скелетизация недоступна или снова завершилась ошибкой, применяется резервная ось `ST_LongestLine`.
 6. Результат очищается, объединяется и упрощается для картографического подписывания.
 
-Функции построения медиальной оси требуют расширение `postgis_sfcgal`. Резервный сценарий работает только на PostGIS, но является геометрической эвристикой, а не полноценным скелетом.
+Функции построения медиальной оси требуют расширение `postgis_sfcgal`. Резервный сценарий работает только на PostGIS и даёт лишь приблизительную ось, а не полноценный скелет.
 
 ## Запуск
 
@@ -34,7 +34,7 @@ FROM demo_centerlines.v_road_centerlines;
 
 A reproducible SQL example for deriving labeling centerlines from road polygons. The wrapper repairs invalid input, tries the available medial-axis function, retries after buffering, and falls back to the longest chord when skeletonization is unavailable or fails.
 
-The medial-axis functions require `postgis_sfcgal`. The fallback needs only PostGIS, but it is a geometric heuristic rather than a true polygon skeleton. Run both SQL files in numerical order and tune the grid, buffer, and simplification tolerances to the coordinate units of your dataset.
+The medial-axis functions require `postgis_sfcgal`. The fallback scenario works only in PostGIS and provides just an approximate axis, not a full skeleton.. Run both SQL files in numerical order and tune the grid, buffer, and simplification tolerances to the coordinate units of your dataset.
 
 ## License
 
